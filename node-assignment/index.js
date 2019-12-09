@@ -1,6 +1,9 @@
 import dotenv from 'dotenv';
 import express from 'express';
-import clubs from './api/clubs';
+import bodyParser from 'body-parser';
+import clubsRouter from './api/clubs';
+
+
 
 dotenv.config();
 
@@ -10,8 +13,11 @@ const port = process.env.PORT;
 
 app.use(express.static('public'));
 
-app.use('/api/clubs', clubs);
+app.use('/api/clubs', clubsRouter);
 app.use(express.static('public'));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
 
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
