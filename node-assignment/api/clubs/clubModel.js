@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Club from '../../web-app-assignment1/src/components/clubComponents/club';
+
 const Schema = mongoose.Schema;
 
 const ClubSchema = new Schema({

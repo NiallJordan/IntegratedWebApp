@@ -3,6 +3,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import clubsRouter from './api/clubs';
 
+import './db';
+import loadClubs from './clubsData';
+
+if (process.env.seedDb) {
+  loadClubs();
+};
 
 
 dotenv.config();
