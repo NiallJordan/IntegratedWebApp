@@ -2,22 +2,21 @@ import clubModel from './api/clubs/clubModel';
 
 const clubs=[
     {
-        'name':'Liverpool',
-        'logo':'./clubPics/liverpool.png',
-        'league':'Premier League',
-        'placeInLeague':1,
-        'phone':'0151-976-1892',
-        'city':'Liverpool',
-        'country':'England',
-        'stadium_name':'Anfield',
-        'capacity':54074,
-        'numberOfPlayers':37,
-        "yearEstablished":1892,
-        "manager_name":'Jurgen Klopp',
-        "titlesWon":1,
+        name:'Liverpool',
+        logo:'./clubPics/liverpool.png',
+        league:'Premier League',
+        placeInLeague:1,
+        phone:'0151-976-1892',
+        city:'Liverpool',
+        country:'England',
+        stadium_name:'Anfield',
+        capacity:54074,
+        numberOfPlayers:37,
+        yearEstablished:1892,
+        manager_name:'Jurgen Klopp',
+        titlesWon:1
     },
     {
-        id:2,
         name: 'Leicester',
         logo:'./clubPics/leicester.png',
         league: 'Premier League',
@@ -33,7 +32,6 @@ const clubs=[
         titlesWon :0
     },
     {
-        id:3,
         name: 'Man City',
         logo:'./clubPics/mancity.png',
         league: 'Premier League',
@@ -49,7 +47,6 @@ const clubs=[
         titlesWon :3
     },
     {
-        id:4,
         name: 'Chelsea',
         logo:'./clubPics/chelsea.png',
         league: 'Premier League',
@@ -65,7 +62,6 @@ const clubs=[
         titlesWon:0
     },
     {
-        id:5,
         name: 'Juventus',
         logo:'./clubPics/juve.png',
         league: 'Serie A',
@@ -82,12 +78,23 @@ const clubs=[
     }
 ];
 
-export default async function loadClubs(){
-    try{
-        await clubModel.deleteMany();
-        await clubModel.collection.insertMany(clubs);
-        console.info(`${clubs.length} clubs were sucessfully stored`);
-    } catch (err){
-        console.error(`Failed to load Club data: ${err}`);
-    }
-}
+export const loadClubs = () => {
+    clubModel.find({}).remove(function() {
+        clubModel.collection.insert(clubs, (err, docs) =>{
+            if(err){
+                console.log("failed to load Clubs data");
+            }else{
+                console.info(`${clubs.length} clubs were stored`)
+            }
+        });
+    });
+};
+// export default async function loadClubs(){
+//     try{
+//         await clubModel.deleteMany();
+//         await clubModel.collection.insertMany(clubs);
+//         console.info(`${clubs.length} clubs were sucessfully stored`);
+//     } catch (err){
+//         console.error(`Failed to load Club data: ${err}`);
+//     }
+// }

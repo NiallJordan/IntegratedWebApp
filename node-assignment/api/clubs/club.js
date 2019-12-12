@@ -28,8 +28,13 @@ router.get('/:id', asyncHandler(async(req, res) => {
 
 //Add a club
 router.post('/', asyncHandler(async (req, res) => {
-    const club = await Club.create(req.body);
-    res.status(201).json(club);
+    const newClub = req.body;
+    if(newClub){
+        const club = await Club.create(newClub);
+        return res.status(201).send({club});
+    }else{
+        return res.status(500);
+    }
 }));
 
 //Update an existing club
@@ -49,11 +54,18 @@ router.delete('/:id', asyncHandler(async(req, res) => {
     const club = await Club.findById(req.params.id);
     if(!club) return res.send(404);
     await club.remove();
-    return res.status(204).send(club);
+    return res.sendStatus(204).send(club);
 }));
 
+
+/**
+ * 
+ * @param {object} res 
+ * @param {object} err 
+ * @return {object}
+ */
 function handleError(res, err) {
-    return res.send(500, err);
+    return res.sendStatus(500).send(err);
 };
 
 export default router;
