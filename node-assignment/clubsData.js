@@ -3,7 +3,7 @@ import clubModel from './api/clubs/clubModel';
 const clubs=[
     {
         'name':'Liverpool',
-        'logo':'./web-app-assignment1/public/clubPics/arsenal.png',
+        'logo':'./clubPics/liverpool.png',
         'league':'Premier League',
         'placeInLeague':1,
         'phone':'0151-976-1892',

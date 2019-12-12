@@ -27,8 +27,6 @@ const ClubSchema = new Schema({
     },
     yearEstablished:{
         type:Number,
-        min:0,
-        max:2019,
     },
     manager_name:String,
     titlesWon: {
@@ -36,5 +34,14 @@ const ClubSchema = new Schema({
         min:0,
     },
 });
+
+ClubSchema.path('yearEstablished').validate((v)=>{
+    if(v>2019||v<1700){
+        return false;
+    }
+    return true;
+});
+
+
 
 export default mongoose.model('Club', ClubSchema)

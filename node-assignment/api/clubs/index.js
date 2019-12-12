@@ -34,7 +34,7 @@ router.post('/', asyncHandler(async (req, res) => {
 
 //Update an existing club
 router.put('/:id', asyncHandler(async (req, res) => {
-    if(req,body._id) delete req.body._id;
+    if(req.body._id) delete req.body._id;
     const club = await Club.update({
         _id: req.params.id,
     }, req.body, {
