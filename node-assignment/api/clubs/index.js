@@ -5,15 +5,26 @@ import asyncHandler from 'express-async-handler';
 const router = express.Router(); // eslint-disable-line
 
 
-// get a club
-router.get('/:id', async (req, res) => {
+// get clubs
+router.get('/', async (req, res) => {
     try {
-        const clubs = await Contact.find();
+        const clubs = await Club.find();
         res.status(200).json(clubs);
       } catch (error) {
         handleError(res, error.message);
     }
 });
+
+// get clubs
+router.get('/:id', asyncHandler(async(req, res) => {
+    const id = req.params.id;
+    try {
+        const club = await Club.findById(id);
+        res.status(200).json(club);
+      } catch (error) {
+        handleError(res, error.message);
+    }
+}));
 
 //Add a club
 router.post('/', asyncHandler(async (req, res) => {
