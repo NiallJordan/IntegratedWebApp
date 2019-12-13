@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ClubSchema = new Schema({
+    user: {type: Schema.Types.ObjectId,ref:'User', required: true},
     name: {type: String},
     logo: {type: String},
     league: {type: String},

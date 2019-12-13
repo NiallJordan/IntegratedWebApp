@@ -29,6 +29,7 @@ router.get('/:id', asyncHandler(async(req, res) => {
 //Add a club
 router.post('/', asyncHandler(async (req, res) => {
     const newClub = req.body;
+    newClub.user = req.user._id || 'anonymous';
     if(newClub){
         const club = await Club.create(newClub);
         return res.status(201).send({club});
